@@ -34,16 +34,14 @@ class SaveEngineClass():
 
 
 		try:
-			self.loaded_data = json.loads( base64.b64decode( 
-												 self.save_handle.read() ) )
+			self.loaded_data = json.loads( base64.b64decode(self.save_handle.read() ) )
 		except ValueError:
 			return False
 
 			
 		if self.loaded_data != {}:
-			print M('''
-It looks like you've used this tool before! I'll bring you right back to where 
-you left off. If you'd like to revisit older lesson or concepts, enter `@help`!''')
+			print(M('''It looks like you've used this tool before! I'll bring you right back to where 
+you left off. If you'd like to revisit older lesson or concepts, enter `@help`!'''))
 
 			self.parent.LessonBook.load_lesson( self.loaded_data["current_lesson"] )
 			self.parent.LessonBook.lesson_pointer = self.loaded_data["lesson_pointer"]
@@ -62,7 +60,8 @@ you left off. If you'd like to revisit older lesson or concepts, enter `@help`!'
 			self.save_handle = open( self.save_filename, 'w' )
 
 		self.save_handle.seek(0)
-		self.save_handle.write( base64.b64encode( json.dumps( data ) ) )
+
+		self.save_handle.write(str(base64.b64encode(json.dumps( data ).encode("utf-8"))))
 
 
 

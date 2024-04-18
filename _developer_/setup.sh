@@ -14,7 +14,7 @@ BLUE=`tput setaf 6`
 RESET=`tput sgr0`
 
 
-DEPENDENCIES="nodejs-legacy npm"
+DEPENDENCIES="nodejs libnode108 npm" # updated by AJ Read to cover new dependies
 
 function install_dependencies(){
 

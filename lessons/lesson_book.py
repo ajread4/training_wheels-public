@@ -57,14 +57,14 @@ class LessonBookClass(object):
 	def select_lesson( self ):
 
 		if ( not self.lesson_is_loaded ):
-			print M("\nIt looks like a lesson has not yet been loaded.")
+			print(M("\nIt looks like a lesson has not yet been loaded."))
 		else:
-			print M("\nYou already have ") + C(self.current_lesson["name"]) + M(" loaded.")
-			print M("Load something else?")
+			print(M("\nYou already have ") + C(self.current_lesson["name"]) + M(" loaded."))
+			print(M("Load something else?"))
 
 			entered = False
 			while ( not entered ):
-				answer = raw_input("(y/n): ").lower()
+				answer = input("(y/n): ").lower()
 				if answer == "yes" or answer == "y":
 					self.lesson_is_loaded = False
 					self.lesson_pointer = 0
@@ -74,20 +74,20 @@ class LessonBookClass(object):
 				elif answer == "no" or answer == "n":
 					return
 				else:
-					print R("\nPlease enter yes or no.")
+					print(R("\nPlease enter yes or no."))
 
-		print M('''
+		print(M('''
 Please select one of the available lessons by entering the corresponding number.
-Enter the number '0' to go back to what you were doing.\n''')		
+Enter the number '0' to go back to what you were doing.\n'''))		
 
 		for l in self.cleaned_available_lessons:
-			print "\t", l
-		print "\n\n"
+			print("\t", l)
+		print("\n\n")
 
 		
 		while ( not self.lesson_is_loaded ):
-			print M("lesson #:"),
-			self.selected_lesson_number = raw_input()
+			print(M("lesson #:")),
+			self.selected_lesson_number = input()
 
 			if ( self.selected_lesson_number == "0" or self.selected_lesson_number == "quit" ):
 				return
@@ -95,36 +95,36 @@ Enter the number '0' to go back to what you were doing.\n''')
 			try:
 				self.selected_lesson_number = int( self.selected_lesson_number ) - 1
 			except:
-				print R("That does not look like a valid input. Please try again.")
+				print(R("That does not look like a valid input. Please try again."))
 				continue
 
 			if ( self.selected_lesson_number >= 0 and 
 				self.selected_lesson_number < len(self.available_lessons) ):
 
-				print B("_"*79 + "\n")
+				print(B("_"*79 + "\n"))
 				self.load_lesson( self.available_lessons[self.selected_lesson_number] )
 				return
 			else:
-				print R("That does not look like a valid input. Please try again.")
+				print(R("That does not look like a valid input. Please try again."))
 				continue
 
 
 	def go_to_next_lesson( self ):
 
-		print M("It looks like you are all done with this lesson!")
-		print M("I'm going to move you to the next one. You are now on lesson:\n")
+		print(M("It looks like you are all done with this lesson!"))
+		print(M("I'm going to move you to the next one. You are now on lesson:\n"))
 
 		
 		next_lesson_number = self.selected_lesson_number + 1
 
 		if ( next_lesson_number >= len( self.available_lessons ) ):
-			print( Y("Actually -- there are no more lessons!") )
-			print( Y("You're all done for now... go practice Linux!") )
+			print(Y("Actually -- there are no more lessons!"))
+			print(Y("You're all done for now... go practice Linux!"))
 			exit()
 		else:
 
 			next_lesson_name = self.cleaned_available_lessons[next_lesson_number]
-			print "\t" + next_lesson_name + "\n\n"
+			print("\t" + next_lesson_name + "\n\n")
 
 			self.load_lesson( self.available_lessons[next_lesson_number] )
 			self.lesson_pointer = 0
@@ -145,32 +145,32 @@ Enter the number '0' to go back to what you were doing.\n''')
 
 	def select_concept( self ):
 		if ( self.current_lesson == {} ):
-			print R("There is currently no lesson loaded!")
-			print R("Enter `@lessons` to select one to load.")
+			print(R("There is currently no lesson loaded!"))
+			print(R("Enter `@lessons` to select one to load."))
 			return 
 
-		print M('''
+		print(M('''
 The current lesson that is loaded is: ''') + C(self.current_lesson["name"])+ M('''".
 
 Please select one of the concepts you would like to jump to.
 The lesson you are currently looking at is highlighted in '''+ y('yellow') + M('''.
-Enter the number '0' to go back to what you were doing.\n'''))
+Enter the number '0' to go back to what you were doing.\n''')))
 
 		# Display all of the concepts that are available in that lesson.
 		for i in range( len(self.current_lesson["concepts"]) ):
 			number = str(i + 1)
 			if i == self.lesson_pointer:
-				print "\t" + Y( number + ". " +self.current_lesson["concepts"][i]["tag"])
+				print("\t" + Y( number + ". " +self.current_lesson["concepts"][i]["tag"]))
 			else:
-				print "\t" + number + ". " + self.current_lesson["concepts"][i]["tag"]
-		print "\n\n"
+				print("\t" + number + ". " + self.current_lesson["concepts"][i]["tag"])
+		print("\n\n")
 		
 
 		selected = False
 		
 		while ( not selected ):
-			print M("concept #:"),
-			selected_concept_number = raw_input()
+			print(M("concept #:")),
+			selected_concept_number = input()
 
 			if ( selected_concept_number == "0" or selected_concept_number == "quit" ):
 				return
@@ -178,7 +178,7 @@ Enter the number '0' to go back to what you were doing.\n'''))
 			try:
 				selected_concept_number = int( selected_concept_number ) - 1
 			except:
-				print R("That does not look like a valid input. Please try again.")
+				print(R("That does not look like a valid input. Please try again."))
 				continue
 
 
@@ -188,10 +188,10 @@ Enter the number '0' to go back to what you were doing.\n'''))
 				
 				self.lesson_pointer = selected_concept_number
 				self.new_lesson_pointer = selected_concept_number
-				print B("_"*79 + "\n")
+				print(B("_"*79 + "\n"))
 				return
 			else:
-				print R("That does not look like a valid input. Please try again.")
+				print(R("That does not look like a valid input. Please try again."))
 				continue
 
 
@@ -207,13 +207,13 @@ Enter the number '0' to go back to what you were doing.\n'''))
 
 
 		# Begin to load everything from the lesson and current concept...
-		if ( current_lesson.has_key("message") ): message = current_lesson["message"]
-		if ( current_lesson.has_key("command_waiting") ): 
+		if ( "message" in current_lesson): message = current_lesson["message"]
+		if ( "command_waiting" in current_lesson ): 
 			command_waiting = current_lesson["command_waiting"]
 
-			if ( current_lesson.has_key("incorrect") ): 
+			if ("incorrect"  in current_lesson): 
 				incorrect = current_lesson["incorrect"]
-			if self.current_lesson["concepts"][self.lesson_pointer].has_key("in_between_text"):
+			if "in_between_text" in self.current_lesson["concepts"][self.lesson_pointer]:
 				self.something_to_say_inbetween = \
 					R( self.current_lesson["concepts"][self.lesson_pointer]["in_between_text"] )
 			else:
