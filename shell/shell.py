@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: John Hammond
 # @Date:   2016-08-25 00:02:23
-# @Last Modified by:   John Hammond
-# @Last Modified time: 2016-08-29 13:21:24
+# @Last Modified by:   AJ Read
+# @Last Modified time: 2024-04-22
 
 import os
 import textwrap
@@ -111,7 +111,7 @@ class TrainingWheelsShellClass():
 			while ( p ):
 				try:
 					sys.stdout.write( self.LessonBook.something_to_say_inbetween )
-					sys.stdout.write( p.stdout.next() )
+					sys.stdout.write( str(next(p.stdout) ,"utf-8"))
 				except StopIteration:
 					break
 
