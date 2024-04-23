@@ -14,19 +14,13 @@ BLUE=`tput setaf 6`
 RESET=`tput sgr0`
 
 
-DEPENDENCIES="nodejs libnode108 npm" # updated to cover new dependencies 
+DEPENDENCIES="colorama" # updated to cover new dependencies 
 
 function install_dependencies(){
 
-	echo "${FUNCNAME}:${GREEN} installing nodejs and npm...${RESET}"
+	echo "${FUNCNAME}:${GREEN} installing colorama..${RESET}"
 
 	apt-get -y install $DEPENDENCIES || fatal_error
-}
-
-function install_hjson(){
-
-	echo "${FUNCNAME}:${GREEN} installing hjson with npm...${RESET}"
-	npm install hjson -g
 }
 
 function fatal_error(){
@@ -37,13 +31,9 @@ function fatal_error(){
 
 function main(){
 
-	echo "${BLUE} This script will install the dependencies that you should have"
-	echo "${BLUE} to develop for the Training Wheels shell."
-	echo -e "${BLUE} It is really just for convenience sake of using HJSON.\n ${RESET}"
+	echo "${BLUE} This script will install the dependencies that you should have as a user"
 
 	install_dependencies
-
-	install_hjson
 
 }
 
