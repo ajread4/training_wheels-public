@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: John Hammond
 # @Date:   2016-08-25 00:02:23
-# @Last Modified by:   John Hammond
-# @Last Modified time: 2016-08-29 13:21:24
+# @Last Modified by:   AJ Read
+# @Last Modified time: 2024-04-22
 
 import os
 import textwrap
@@ -42,8 +42,7 @@ class TrainingWheelsShellClass():
 
 	def do_help( self ):
 
-		print \
-		textwrap.dedent('''
+		print(textwrap.dedent('''
 
 	@help:		View this help message.
 	@lessons:	Select from a menu of lessons what to study from.
@@ -51,13 +50,13 @@ class TrainingWheelsShellClass():
 
 	TO ADD: @setspeed
 
-		''' )
+		''' ))
 
 
 	def error( self, e ):
-		print colorama.Back.BLACK + R("Oh no! I hit an error!")
-		print r("\n" + str(e.__repr__())), colorama.Back.RESET
-		print r("\n" + e.child_traceback), colorama.Back.RESET
+		print(colorama.Back.BLACK + R("Oh no! I hit an error!"))
+		print(r("\n" + str(e.__repr__())), colorama.Back.RESET)
+		print(r("\n" + e.child_traceback), colorama.Back.RESET)
 
 
 
@@ -76,13 +75,13 @@ class TrainingWheelsShellClass():
 		
 
 
-		self.entered_input = raw_input(  ps1 ).strip()
+		self.entered_input = input(  ps1 ).strip()
 		readline.add_history( self.entered_input )
 
 	def say_goodbye( self ):
 
-		print C("\n\nGoodbye!") 
-		print B("_" * 78 + "\n")
+		print(C("\n\nGoodbye!"))
+		print(B("_" * 78 + "\n"))
 		exit()
 
 
@@ -91,11 +90,11 @@ class TrainingWheelsShellClass():
 
 		
 		if self.entered_input == "": return
-		if self.entered_input in self.special_cases.iterkeys():
+		if self.entered_input in iter(self.special_cases):
 			# Run the corresponding function that follows the 
 			self.special_cases[self.entered_input]()
 			return True
-		if self.entered_input in self.commands.iterkeys():
+		if self.entered_input in iter(self.commands):
 			# Run the corresponding function that follows the 
 			self.commands[self.entered_input]()
 			return 
@@ -112,12 +111,12 @@ class TrainingWheelsShellClass():
 			while ( p ):
 				try:
 					sys.stdout.write( self.LessonBook.something_to_say_inbetween )
-					sys.stdout.write( p.stdout.next() )
+					sys.stdout.write( str(next(p.stdout) ,"utf-8"))
 				except StopIteration:
 					break
 
 		except OSError as e:
-			print self.entered_input + ": command not found"
+			print(self.entered_input + ": command not found")
 
 
 
