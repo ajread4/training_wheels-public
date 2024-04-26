@@ -54,7 +54,11 @@ Files & Directory Information
     
     This directory holds code that is meant to be utilized by someone who plans on developing content for the __Training Wheels__ shell -- it includes some [`bash`][bash] scripts to install dependencies to build lesson files like [`nodejs`][nodejs], [`npm`][npm],  and [`hjson`][hjson]. 
 
+* [`_userdependencies_`](_userdependencies_)
 
+    This directory holds code that must be run prior to utilizing the __Training Wheels__ shell -- it includes some [`bash`][bash] scripts to install dependencies. 
+
+To set up the shell, run 
 
 [MicroSD]: https://en.wikipedia.org/wiki/MicroSD
 [Raspbian]: https://www.raspberrypi.org/downloads/raspbian/
